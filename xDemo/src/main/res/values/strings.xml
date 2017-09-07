@@ -5,8 +5,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_rotate_layer">RotateActivity</string>
-    
+
     <string name="github">GitHub</string>
     <string name="github_label">SlidingMenu on GitHub</string>
     <string name="properties">SlidingMenu Properties</string>
+
+    <string name="hello">Hello World, QuickTransferActivity!</string>
+    <string name="turn_on_send">开启发送</string>
+    <string name="turn_off_send">关闭发送</string>
+    <string name="turn_on_receiver">开启接受</string>
+    <string name="turn_off_receiver">关闭接受</string>
 </resources>

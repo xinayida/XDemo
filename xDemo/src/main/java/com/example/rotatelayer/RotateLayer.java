@@ -13,37 +13,37 @@ import android.view.ViewGroup;
 import android.widget.Scroller;
 
 /**
- * ·ÂLauncherÖĞµÄWorkSapce£¬¿ÉÒÔ×óÓÒ»¬¶¯ÇĞ»»ÆÁÄ»µÄÀà
+ * ä»¿Launcherä¸­çš„WorkSapceï¼Œå¯ä»¥å·¦å³æ»‘åŠ¨åˆ‡æ¢å±å¹•çš„ç±»
  */
 
 public class RotateLayer extends ViewGroup {
-	// µ±Ç°µÄÆÁÄ»ÊÓÍ¼
+	// å½“å‰çš„å±å¹•è§†å›¾
 	private int mCurScreen = 1;
-	// »¬¶¯µÄËÙ¶È
+	// æ»‘åŠ¨çš„é€Ÿåº¦
 	private static final int SNAP_VELOCITY = 600;
 
 	private static final String TAG = "ScrollLayout";
-	// ÎŞÊÂ¼şµÄ×´Ì¬
+	// æ— äº‹ä»¶çš„çŠ¶æ€
 	private static final int TOUCH_STATE_REST = 0;
-	// ´¦ÓÚÍÏ¶¯µÄ×´Ì¬
+	// å¤„äºæ‹–åŠ¨çš„çŠ¶æ€
 	private static final int TOUCH_STATE_SCROLLING = 1;
 
 	private float mLastMotionX;
-	// ÓÃÓÚ»¬¶¯µÄÀà
+	// ç”¨äºæ»‘åŠ¨çš„ç±»
 	private Scroller mScroller;
 
 	private int mTouchSlop;
 
 	private int mTouchState = TOUCH_STATE_REST;
-	// ÓÃÀ´¸ú×Ù´¥ÃşËÙ¶ÈµÄÀà
+	// ç”¨æ¥è·Ÿè¸ªè§¦æ‘¸é€Ÿåº¦çš„ç±»
 	private VelocityTracker mVelocityTracker;
 
 	private int mWidth;
 
-	// ÓÃÀ´´¦ÀíÁ¢ÌåĞ§¹ûµÄÀà
+	// ç”¨æ¥å¤„ç†ç«‹ä½“æ•ˆæœçš„ç±»
 	private Camera mCamera;
 	private Matrix mMatrix;
-	// Ğı×ªµÄ½Ç¶È£¬¿ÉÒÔ½øĞĞĞŞ¸ÄÀ´¹Û²ìĞ§¹û
+	// æ—‹è½¬çš„è§’åº¦ï¼Œå¯ä»¥è¿›è¡Œä¿®æ”¹æ¥è§‚å¯Ÿæ•ˆæœ
 	private float angle = 90;
 
 	public RotateLayer(Context context, AttributeSet attrs) {
@@ -52,7 +52,7 @@ public class RotateLayer extends ViewGroup {
 
 	}
 
-	// ÔÚ¹¹ÔìÆ÷ÖĞ³õÊ¼»¯
+	// åœ¨æ„é€ å™¨ä¸­åˆå§‹åŒ–
 	public RotateLayer(Context context, AttributeSet attrs, int defStyle) {
 
 		super(context, attrs, defStyle);
@@ -89,7 +89,7 @@ public class RotateLayer extends ViewGroup {
 	}
 
 	/*
-	 * µ±½øĞĞView»¬¶¯Ê±£¬»áµ¼ÖÂµ±Ç°µÄViewÎŞĞ§£¬¸Ãº¯ÊıµÄ×÷ÓÃÊÇ¶ÔView½øĞĞÖØĞÂ»æÖÆ µ÷ÓÃdrawScreenº¯Êı
+	 * å½“è¿›è¡ŒViewæ»‘åŠ¨æ—¶ï¼Œä¼šå¯¼è‡´å½“å‰çš„Viewæ— æ•ˆï¼Œè¯¥å‡½æ•°çš„ä½œç”¨æ˜¯å¯¹Viewè¿›è¡Œé‡æ–°ç»˜åˆ¶ è°ƒç”¨drawScreenå‡½æ•°
 	 */
 	@Override
 	protected void dispatchDraw(Canvas canvas) {
@@ -102,14 +102,14 @@ public class RotateLayer extends ViewGroup {
 	}
 
 	/*
-	 * ´¦ÀíÑ­»· Á¢ÌåĞ§¹ûµÄÊµÏÖº¯Êı ,screenÎªÄÄÒ»¸ö×ÓView
+	 * å¤„ç†å¾ªç¯ ç«‹ä½“æ•ˆæœçš„å®ç°å‡½æ•° ,screenä¸ºå“ªä¸€ä¸ªå­View
 	 */
 	private void drawScreen(Canvas canvas, int screen, long drawingTime) {
-		// µÃµ½µ±Ç°×ÓViewµÄ¿í¶È
+		// å¾—åˆ°å½“å‰å­Viewçš„å®½åº¦
 		final int width = getWidth();
 		final int scrollWidth = screen * width;
 		final int scrollX = this.getScrollX();
-		// Æ«ÒÆÁ¿²»×ãµÄÊ±ºòÖ±½Ó
+		// åç§»é‡ä¸è¶³çš„æ—¶å€™ç›´æ¥
 		if (scrollWidth > scrollX + width || scrollWidth + width < scrollX) {
 			return;
 		}
@@ -217,7 +217,7 @@ public class RotateLayer extends ViewGroup {
 
 	/*
 	 * 
-	 * Îª×ÓViewÖ¸¶¨Î»ÖÃ
+	 * ä¸ºå­ViewæŒ‡å®šä½ç½®
 	 */
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -236,7 +236,7 @@ public class RotateLayer extends ViewGroup {
 		}
 	}
 
-	// ÖØĞ´´Ë·½·¨ÓÃÀ´¼ÆËã¸ß¶ÈºÍ¿í¶È
+	// é‡å†™æ­¤æ–¹æ³•ç”¨æ¥è®¡ç®—é«˜åº¦å’Œå®½åº¦
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
@@ -244,8 +244,8 @@ public class RotateLayer extends ViewGroup {
 		final int width = MeasureSpec.getSize(widthMeasureSpec);
 		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		// Log.e(TAG, "onMeasure width = " + width);
-		// Exactly£ºwidth´ú±íµÄÊÇ¾«È·µÄ³ß´ç
-		// AT_MOST£ºwidth´ú±íµÄÊÇ×î´ó¿É»ñµÃµÄ¿Õ¼ä
+		// Exactlyï¼šwidthä»£è¡¨çš„æ˜¯ç²¾ç¡®çš„å°ºå¯¸
+		// AT_MOSTï¼šwidthä»£è¡¨çš„æ˜¯æœ€å¤§å¯è·å¾—çš„ç©ºé—´
 		if (widthMode != MeasureSpec.EXACTLY) {
 			throw new IllegalStateException(
 					"ScrollLayout only canmCurScreen run at EXACTLY mode!");
@@ -258,7 +258,7 @@ public class RotateLayer extends ViewGroup {
 		}
 
 		// The children are given the same width and height as the scrollLayout
-		// µÃµ½¶àÉÙÒ³(×ÓView)²¢ÉèÖÃËûÃÇµÄ¿íºÍ¸ß
+		// å¾—åˆ°å¤šå°‘é¡µ(å­View)å¹¶è®¾ç½®ä»–ä»¬çš„å®½å’Œé«˜
 		final int count = getChildCount();
 		for (int i = 0; i < count; i++) {
 			getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
@@ -274,12 +274,12 @@ public class RotateLayer extends ViewGroup {
 	public boolean onTouchEvent(MotionEvent event) {
 
 		if (mVelocityTracker == null) {
-			// Ê¹ÓÃobtain·½·¨µÃµ½VelocityTrackerµÄÒ»¸ö¶ÔÏó
+			// ä½¿ç”¨obtainæ–¹æ³•å¾—åˆ°VelocityTrackerçš„ä¸€ä¸ªå¯¹è±¡
 			mVelocityTracker = VelocityTracker.obtain();
 		}
-		// ½«µ±Ç°µÄ´¥ÃşÊÂ¼ş´«µİ¸øVelocityTracker¶ÔÏó
+		// å°†å½“å‰çš„è§¦æ‘¸äº‹ä»¶ä¼ é€’ç»™VelocityTrackerå¯¹è±¡
 		mVelocityTracker.addMovement(event);
-		// µÃµ½´¥ÃşÊÂ¼şµÄÀàĞÍ
+		// å¾—åˆ°è§¦æ‘¸äº‹ä»¶çš„ç±»å‹
 		final int action = event.getAction();
 		final float x = event.getX();
 
@@ -307,9 +307,9 @@ public class RotateLayer extends ViewGroup {
 			// if (mTouchState == TOUCH_STATE_SCROLLING) {
 
 			final VelocityTracker velocityTracker = mVelocityTracker;
-			// ¼ÆËãµ±Ç°µÄËÙ¶È
+			// è®¡ç®—å½“å‰çš„é€Ÿåº¦
 			velocityTracker.computeCurrentVelocity(1000);
-			// »ñµÃµ±Ç°µÄËÙ¶È
+			// è·å¾—å½“å‰çš„é€Ÿåº¦
 			int velocityX = (int) velocityTracker.getXVelocity();
 			// Log.d(TAG, "velocityX:" + velocityX + "; event : up");
 			if (velocityX > SNAP_VELOCITY && mCurScreen > 0) {
@@ -354,24 +354,24 @@ public class RotateLayer extends ViewGroup {
 
 	private void snapToDestination() {
 		setMWidth();
-		// ¸ù¾İViewµÄ¿í¶ÈÒÔ¼°»¬¶¯µÄÖµÀ´ÅĞ¶ÏÊÇÄÄ¸öView
+		// æ ¹æ®Viewçš„å®½åº¦ä»¥åŠæ»‘åŠ¨çš„å€¼æ¥åˆ¤æ–­æ˜¯å“ªä¸ªView
 		final int destScreen = (getScrollX() + mWidth / 2) / mWidth;
 		snapToScreen(destScreen);
 
 	}
 
 	public void snapToScreen(int whichScreen) {
-		// ¼òµ¥µÄÒÆµ½Ä¿±êÆÁÄ»£¬¿ÉÄÜÊÇµ±Ç°ÆÁ»òÕßÏÂÒ»ÆÁÄ»
-		// Ö±½ÓÌø×ª¹ıÈ¥£¬²»Ì«ÓÑºÃ
+		// ç®€å•çš„ç§»åˆ°ç›®æ ‡å±å¹•ï¼Œå¯èƒ½æ˜¯å½“å‰å±æˆ–è€…ä¸‹ä¸€å±å¹•
+		// ç›´æ¥è·³è½¬è¿‡å»ï¼Œä¸å¤ªå‹å¥½
 		// scrollTo(mLastScreen * getWidth(), 0);
-		// ÎªÁËÓÑºÃĞÔ£¬ÎÒÃÇÔÚÔö¼ÓÒ»¸ö¶¯»­Ğ§¹û
-		// ĞèÒªÔÙ´Î»¬¶¯µÄ¾àÀë ÆÁ»òÕßÏÂÒ»ÆÁÄ»µÄ¼ÌĞø»¬¶¯¾àÀë
+		// ä¸ºäº†å‹å¥½æ€§ï¼Œæˆ‘ä»¬åœ¨å¢åŠ ä¸€ä¸ªåŠ¨ç”»æ•ˆæœ
+		// éœ€è¦å†æ¬¡æ»‘åŠ¨çš„è·ç¦» å±æˆ–è€…ä¸‹ä¸€å±å¹•çš„ç»§ç»­æ»‘åŠ¨è·ç¦»
 		mCurScreen = whichScreen;
 		if (mCurScreen > getChildCount() - 1)
 			mCurScreen = getChildCount() - 1;
 		int dx = mCurScreen * getWidth() - getScrollX();
 		mScroller.startScroll(getScrollX(), 0, dx, 0, Math.abs(dx) * 2);
-		// ´ËÊ±ĞèÒªÊÖ¶¯Ë¢ĞÂView ·ñÔòÃ»Ğ§¹û
+		// æ­¤æ—¶éœ€è¦æ‰‹åŠ¨åˆ·æ–°View å¦åˆ™æ²¡æ•ˆæœ
 		invalidate();
 	}
 

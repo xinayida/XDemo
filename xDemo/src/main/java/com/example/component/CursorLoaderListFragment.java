@@ -22,37 +22,37 @@ import android.widget.SimpleCursorAdapter;
 public class CursorLoaderListFragment extends ListFragment implements
 		OnQueryTextListener, LoaderManager.LoaderCallbacks<Cursor> {
 
-	// ÕâÊÇÓÃÓÚÏÔÊ¾ÁĞ±íÊı¾İµÄAdapter
+	// è¿™æ˜¯ç”¨äºæ˜¾ç¤ºåˆ—è¡¨æ•°æ®çš„Adapter
 	SimpleCursorAdapter mAdapter;
 
-	// Èç¹û·Çnull£¬ÕâÊÇµ±Ç°µÄËÑË÷¹ıÂÇÆ÷
+	// å¦‚æœénullï¼Œè¿™æ˜¯å½“å‰çš„æœç´¢è¿‡è™‘å™¨
 	String mCurFilter;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		// Èç¹ûÁĞ±íÖĞÃ»ÓĞÊı¾İ£¬¾Í¸ø¿Ø¼şÒ»Ğ©ÎÄ×ÖÈ¥ÏÔÊ¾£®ÔÚÒ»¸öÕæÕıµÄÓ¦ÓÃ
-		// ÖĞÕâÓ¦ÓÃ×ÊÔ´ÖĞÈ¡µÃ£®
+		// å¦‚æœåˆ—è¡¨ä¸­æ²¡æœ‰æ•°æ®ï¼Œå°±ç»™æ§ä»¶ä¸€äº›æ–‡å­—å»æ˜¾ç¤ºï¼åœ¨ä¸€ä¸ªçœŸæ­£çš„åº”ç”¨
+		// ä¸­è¿™åº”ç”¨èµ„æºä¸­å–å¾—ï¼
 		setEmptyText("No phone numbers");
 
-		// ÎÒÃÇÔÚ¶¯×÷À¸ÖĞÓĞÒ»¸ö²Ëµ¥Ïî£®
+		// æˆ‘ä»¬åœ¨åŠ¨ä½œæ ä¸­æœ‰ä¸€ä¸ªèœå•é¡¹ï¼
 		setHasOptionsMenu(true);
 
-		// ´´½¨Ò»¸ö¿ÕµÄadapter£¬ÎÒÃÇ½«ÓÃËüÏÔÊ¾¼ÓÔØºóµÄÊı¾İ
+		// åˆ›å»ºä¸€ä¸ªç©ºçš„adapterï¼Œæˆ‘ä»¬å°†ç”¨å®ƒæ˜¾ç¤ºåŠ è½½åçš„æ•°æ®
 		mAdapter = new SimpleCursorAdapter(getActivity(),
 				android.R.layout.simple_list_item_2, null, new String[] {
 						Contacts.DISPLAY_NAME, Contacts.CONTACT_STATUS },
 				new int[] { android.R.id.text1, android.R.id.text2 }, 0);
 		setListAdapter(mAdapter);
 
-		// ×¼±¸loader.¿ÉÄÜÊÇÖØÁ¬µ½Ò»¸öÒÑ´æÔÚµÄ»ò¿ªÊ¼Ò»¸öĞÂµÄ
+		// å‡†å¤‡loader.å¯èƒ½æ˜¯é‡è¿åˆ°ä¸€ä¸ªå·²å­˜åœ¨çš„æˆ–å¼€å§‹ä¸€ä¸ªæ–°çš„
 		getLoaderManager().initLoader(0, null, this);
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// ·ÅÖÃÒ»¸ö¶¯×÷À¸ÏîÓÃÓÚËÑË÷£®
+		// æ”¾ç½®ä¸€ä¸ªåŠ¨ä½œæ é¡¹ç”¨äºæœç´¢ï¼
 		MenuItem item = menu.add("Search");
 		item.setIcon(android.R.drawable.ic_menu_search);
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -62,8 +62,8 @@ public class CursorLoaderListFragment extends ListFragment implements
 	}
 
 	public boolean onQueryTextChange(String newText) {
-		// ÔÚ¶¯×÷À¸ÉÏµÄËÑË÷×Ö´®¸Ä±äÊ±±»µ÷ÓÃ£®¸üĞÂ
-		// ËÑË÷¹ıÂËÆ÷£¬²¢ÖØÆôloaderÀ´Ö´ĞĞÒ»¸öĞÂµÄ²éÑ¯
+		// åœ¨åŠ¨ä½œæ ä¸Šçš„æœç´¢å­—ä¸²æ”¹å˜æ—¶è¢«è°ƒç”¨ï¼æ›´æ–°
+		// æœç´¢è¿‡æ»¤å™¨ï¼Œå¹¶é‡å¯loaderæ¥æ‰§è¡Œä¸€ä¸ªæ–°çš„æŸ¥è¯¢
 		mCurFilter = !TextUtils.isEmpty(newText) ? newText : null;
 		getLoaderManager().restartLoader(0, null, this);
 		return true;
@@ -71,24 +71,24 @@ public class CursorLoaderListFragment extends ListFragment implements
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		// ÎÒÃÇ²»¹ØĞÄÕâ¸ö·½·¨
+		// æˆ‘ä»¬ä¸å…³å¿ƒè¿™ä¸ªæ–¹æ³•
 		return true;
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// Ğ´ÈëÄãÏëĞ´µÄ´úÂë
+		// å†™å…¥ä½ æƒ³å†™çš„ä»£ç 
 		Log.i("FragmentComplexList", "Item clicked: " + id);
 	}
 
-	// ÕâÊÇÎÒÃÇÏë»ñÈ¡µÄÁªÏµÈËÖĞÒ»ĞĞµÄÊı¾İ£®
+	// è¿™æ˜¯æˆ‘ä»¬æƒ³è·å–çš„è”ç³»äººä¸­ä¸€è¡Œçš„æ•°æ®ï¼
 	static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] {
 			Contacts._ID, Contacts.DISPLAY_NAME, Contacts.CONTACT_STATUS,
 			Contacts.CONTACT_PRESENCE, Contacts.PHOTO_ID, Contacts.LOOKUP_KEY, };
 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// µ±Ò»¸öĞÂµÄloaderĞè±»´´½¨Ê±µ÷ÓÃ£®±¾Àı½öÓĞÒ»¸öLoader£¬
-		// ËùÒÔÎÒÃÇ²»Ğè¹ØĞÄID£®Ê×ÏÈÉèÖÃbase URI£¬URIÖ¸ÏòµÄÊÇÁªÏµÈË
+		// å½“ä¸€ä¸ªæ–°çš„loaderéœ€è¢«åˆ›å»ºæ—¶è°ƒç”¨ï¼æœ¬ä¾‹ä»…æœ‰ä¸€ä¸ªLoaderï¼Œ
+		// æ‰€ä»¥æˆ‘ä»¬ä¸éœ€å…³å¿ƒIDï¼é¦–å…ˆè®¾ç½®base URIï¼ŒURIæŒ‡å‘çš„æ˜¯è”ç³»äºº
 		Uri baseUri;
 		if (mCurFilter != null) {
 			baseUri = Uri.withAppendedPath(Contacts.CONTENT_FILTER_URI,
@@ -97,8 +97,8 @@ public class CursorLoaderListFragment extends ListFragment implements
 			baseUri = Contacts.CONTENT_URI;
 		}
 
-		// ÏÖÔÚ´´½¨²¢·µ»ØÒ»¸öCursorLoader£¬Ëü½«¸ºÔğ´´½¨Ò»¸ö
-		// CursorÓÃÓÚÏÔÊ¾Êı¾İ
+		// ç°åœ¨åˆ›å»ºå¹¶è¿”å›ä¸€ä¸ªCursorLoaderï¼Œå®ƒå°†è´Ÿè´£åˆ›å»ºä¸€ä¸ª
+		// Cursorç”¨äºæ˜¾ç¤ºæ•°æ®
 		String select = "((" + Contacts.DISPLAY_NAME + " NOTNULL) AND ("
 				+ Contacts.HAS_PHONE_NUMBER + "=1) AND ("
 				+ Contacts.DISPLAY_NAME + " != '' ))";
@@ -108,13 +108,13 @@ public class CursorLoaderListFragment extends ListFragment implements
 	}
 
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-		// ½«ĞÂµÄcursor»»½øÀ´£®(¿ò¼Ü½«ÔÚÎÒÃÇ·µ»ØÊ±¹ØĞÄÒ»ÏÂ¾ÉcursorµÄ¹Ø±Õ)
+		// å°†æ–°çš„cursoræ¢è¿›æ¥ï¼(æ¡†æ¶å°†åœ¨æˆ‘ä»¬è¿”å›æ—¶å…³å¿ƒä¸€ä¸‹æ—§cursorçš„å…³é—­)
 		mAdapter.swapCursor(data);
 	}
 
 	public void onLoaderReset(Loader<Cursor> loader) {
-		// ÔÚ×îºóÒ»¸öCursor×¼±¸½øÈëÉÏÃæµÄonLoadFinished()Ö®Ç°£®
-		// CursorÒª±»¹Ø±ÕÁË£¬ÎÒÃÇĞèÒªÈ·±£²»ÔÙÊ¹ÓÃËü£®
+		// åœ¨æœ€åä¸€ä¸ªCursorå‡†å¤‡è¿›å…¥ä¸Šé¢çš„onLoadFinished()ä¹‹å‰ï¼
+		// Cursorè¦è¢«å…³é—­äº†ï¼Œæˆ‘ä»¬éœ€è¦ç¡®ä¿ä¸å†ä½¿ç”¨å®ƒï¼
 		mAdapter.swapCursor(null);
 	}
 }

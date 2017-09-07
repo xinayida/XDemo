@@ -48,11 +48,11 @@ public class CameraTest extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		Toast.makeText(this, "result " + resultCode , 1000).show();
+		Toast.makeText(this, "result " + resultCode , Toast.LENGTH_LONG).show();
 
         if(resultCode != RESULT_OK) return;
 		if (requestCode == 1) {
-			
+
 			BitmapFactory.Options opts = new BitmapFactory.Options();
 			opts.inSampleSize = 1;
 			opts.inJustDecodeBounds = true;
@@ -64,12 +64,12 @@ public class CameraTest extends Activity {
 			int tarH = tarW;
 			opts.inSampleSize = Math.max(w, h) / tarW;
 			opts.inJustDecodeBounds = false;
-			
+
 			Bitmap img = BitmapFactory.decodeFile(imgPath, opts);
-			((ImageView)findViewById(R.id.imageView)).setImageBitmap(img);
+			((ImageView) findViewById(R.id.imageView)).setImageBitmap(img);
 
-		}else (requestCode == 2){
+		} else if(requestCode == 2){
 
-        }
+		}
 	}
 }

@@ -19,7 +19,7 @@ public class FloatView extends ImageView {
 	private OnClickListener mClickListener;
 	private WindowManager windowManager = (WindowManager) getContext()
 			.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-	// ´ËwindowManagerParams±äÁ¿Îª»ñÈ¡µÄÈ«¾Ö±äÁ¿£¬ÓÃÒÔ±£´æĞü¸¡´°¿ÚµÄÊôĞÔ
+	// æ­¤windowManagerParamså˜é‡ä¸ºè·å–çš„å…¨å±€å˜é‡ï¼Œç”¨ä»¥ä¿å­˜æ‚¬æµ®çª—å£çš„å±æ€§
 	private WindowManager.LayoutParams windowManagerParams = ((DemoApp) getContext()
 			.getApplicationContext()).getWindowParams();
 
@@ -29,28 +29,28 @@ public class FloatView extends ImageView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		// »ñÈ¡µ½×´Ì¬À¸µÄ¸ß¶È
+		// è·å–åˆ°çŠ¶æ€æ çš„é«˜åº¦
 		Rect frame = new Rect();
 		getWindowVisibleDisplayFrame(frame);
 		int statusBarHeight = frame.top;
 		System.out.println("statusBarHeight:" + statusBarHeight);
-		// »ñÈ¡Ïà¶ÔÆÁÄ»µÄ×ø±ê£¬¼´ÒÔÆÁÄ»×óÉÏ½ÇÎªÔ­µã
+		// è·å–ç›¸å¯¹å±å¹•çš„åæ ‡ï¼Œå³ä»¥å±å¹•å·¦ä¸Šè§’ä¸ºåŸç‚¹
 		x = event.getRawX();
-		y = event.getRawY() - statusBarHeight; // statusBarHeightÊÇÏµÍ³×´Ì¬À¸µÄ¸ß¶È
+		y = event.getRawY() - statusBarHeight; // statusBarHeightæ˜¯ç³»ç»ŸçŠ¶æ€æ çš„é«˜åº¦
 //		Log.i("tag", "currX" + x + "====currY" + y);
 		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN: // ²¶»ñÊÖÖ¸´¥Ãş°´ÏÂ¶¯×÷
-			// »ñÈ¡Ïà¶ÔViewµÄ×ø±ê£¬¼´ÒÔ´ËView×óÉÏ½ÇÎªÔ­µã
+		case MotionEvent.ACTION_DOWN: // æ•è·æ‰‹æŒ‡è§¦æ‘¸æŒ‰ä¸‹åŠ¨ä½œ
+			// è·å–ç›¸å¯¹Viewçš„åæ ‡ï¼Œå³ä»¥æ­¤Viewå·¦ä¸Šè§’ä¸ºåŸç‚¹
 			mTouchX = event.getX();
 			mTouchY = event.getY();
 			mStartX = x;
 			mStartY = y;
 //			Log.i("tag", "startX" + mTouchX + "====startY" + mTouchY);
 			break;
-		case MotionEvent.ACTION_MOVE: // ²¶»ñÊÖÖ¸´¥ÃşÒÆ¶¯¶¯×÷
+		case MotionEvent.ACTION_MOVE: // æ•è·æ‰‹æŒ‡è§¦æ‘¸ç§»åŠ¨åŠ¨ä½œ
 			updateViewPosition();
 			break;
-		case MotionEvent.ACTION_UP: // ²¶»ñÊÖÖ¸´¥ÃşÀë¿ª¶¯×÷
+		case MotionEvent.ACTION_UP: // æ•è·æ‰‹æŒ‡è§¦æ‘¸ç¦»å¼€åŠ¨ä½œ
 			updateViewPosition();
 			mTouchX = mTouchY = 0;
 			if ((x - mStartX) < 5 && (y - mStartY) < 5) {
@@ -69,9 +69,9 @@ public class FloatView extends ImageView {
 	}
 
 	private void updateViewPosition() {
-		// ¸üĞÂ¸¡¶¯´°¿ÚÎ»ÖÃ²ÎÊı
+		// æ›´æ–°æµ®åŠ¨çª—å£ä½ç½®å‚æ•°
 		windowManagerParams.x = (int) (x - mTouchX);
 		windowManagerParams.y = (int) (y - mTouchY);
-		windowManager.updateViewLayout(this, windowManagerParams); // Ë¢ĞÂÏÔÊ¾
+		windowManager.updateViewLayout(this, windowManagerParams); // åˆ·æ–°æ˜¾ç¤º
 	}
 }

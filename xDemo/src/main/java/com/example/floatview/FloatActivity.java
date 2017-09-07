@@ -2,8 +2,12 @@ package com.example.floatview;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.DemoApp;
@@ -21,13 +26,27 @@ public class FloatActivity extends Activity implements OnClickListener {
 	private WindowManager.LayoutParams windowManagerParams = null;
 	private FloatView floatView = null;
 
+	private TextView mTextView;
+	private int count = 0;
+
+	private Handler mHandler = new Handler(Looper.myLooper()){
+		@Override
+		public void handleMessage(Message msg) {
+			if (mTextView != null) {
+				mTextView.setText("" + count++);
+				mHandler.sendEmptyMessageDelayed(0, 1000);
+			}
+		}
+	};
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);// È¡Ïû±êÌâÀ¸
+		requestWindowFeature(Window.FEATURE_NO_TITLE);// å–æ¶ˆæ ‡é¢˜æ 
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);// È«ÆÁ
-//		setContentView(R.layout.activity_main);
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);// å…¨å±
+		setContentView(R.layout.float_layout);
+		mTextView = (TextView) findViewById(R.id.text_view);
+		mHandler.sendEmptyMessage(0);
 		createView();
 	}
 
@@ -39,42 +58,45 @@ public class FloatActivity extends Activity implements OnClickListener {
 
 	public void onDestroy() {
 		super.onDestroy();
-		// ÔÚ³ÌĞòÍË³ö(ActivityÏú»Ù£©Ê±Ïú»ÙĞü¸¡´°¿Ú
+		// åœ¨ç¨‹åºé€€å‡º(Activityé”€æ¯ï¼‰æ—¶é”€æ¯æ‚¬æµ®çª—å£
 		windowManager.removeView(floatView);
+		mHandler.removeMessages(0);
 	}
 
 	private void createView() {
 		floatView = new FloatView(getApplicationContext());
 		floatView.setOnClickListener(this);
-		floatView.setImageResource(R.drawable.ic_launcher); // ÕâÀï¼òµ¥µÄÓÃ×Ô´øµÄiconÀ´×öÑİÊ¾
-		// »ñÈ¡WindowManager
+		floatView.setImageResource(R.drawable.ic_launcher); // è¿™é‡Œç®€å•çš„ç”¨è‡ªå¸¦çš„iconæ¥åšæ¼”ç¤º
+		// è·å–WindowManager
 		windowManager = (WindowManager) getApplicationContext()
 				.getSystemService(Context.WINDOW_SERVICE);
-		// ÉèÖÃLayoutParams(È«¾Ö±äÁ¿£©Ïà¹Ø²ÎÊı
+		// è®¾ç½®LayoutParams(å…¨å±€å˜é‡ï¼‰ç›¸å…³å‚æ•°
 		windowManagerParams = ((DemoApp) getApplication()).getWindowParams();
-		windowManagerParams.type = LayoutParams.TYPE_PHONE; // ÉèÖÃwindow type
-		windowManagerParams.format = PixelFormat.RGBA_8888; // ÉèÖÃÍ¼Æ¬¸ñÊ½£¬Ğ§¹ûÎª±³¾°Í¸Ã÷
-		// ÉèÖÃWindow flag
+		windowManagerParams.type = LayoutParams.TYPE_PHONE; // è®¾ç½®window type
+		windowManagerParams.format = PixelFormat.RGBA_8888; // è®¾ç½®å›¾ç‰‡æ ¼å¼ï¼Œæ•ˆæœä¸ºèƒŒæ™¯é€æ˜
+		// è®¾ç½®Window flag
 		windowManagerParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
 				| LayoutParams.FLAG_NOT_FOCUSABLE;
 		/*
-		 * ×¢Òâ£¬flagµÄÖµ¿ÉÒÔÎª£º LayoutParams.FLAG_NOT_TOUCH_MODAL ²»Ó°ÏìºóÃæµÄÊÂ¼ş
-		 * LayoutParams.FLAG_NOT_FOCUSABLE ²»¿É¾Û½¹ LayoutParams.FLAG_NOT_TOUCHABLE
-		 * ²»¿É´¥Ãş
+		 * æ³¨æ„ï¼Œflagçš„å€¼å¯ä»¥ä¸ºï¼š LayoutParams.FLAG_NOT_TOUCH_MODAL ä¸å½±å“åé¢çš„äº‹ä»¶
+		 * LayoutParams.FLAG_NOT_FOCUSABLE ä¸å¯èšç„¦ LayoutParams.FLAG_NOT_TOUCHABLE
+		 * ä¸å¯è§¦æ‘¸
 		 */
-		// µ÷ÕûĞü¸¡´°¿ÚÖÁ×óÉÏ½Ç£¬±ãÓÚµ÷Õû×ø±ê
+		// è°ƒæ•´æ‚¬æµ®çª—å£è‡³å·¦ä¸Šè§’ï¼Œä¾¿äºè°ƒæ•´åæ ‡
 		windowManagerParams.gravity = Gravity.LEFT | Gravity.TOP;
-		// ÒÔÆÁÄ»×óÉÏ½ÇÎªÔ­µã£¬ÉèÖÃx¡¢y³õÊ¼Öµ
+		// ä»¥å±å¹•å·¦ä¸Šè§’ä¸ºåŸç‚¹ï¼Œè®¾ç½®xã€yåˆå§‹å€¼
 		windowManagerParams.x = 0;
 		windowManagerParams.y = 0;
-		// ÉèÖÃĞü¸¡´°¿Ú³¤¿íÊı¾İ
+		// è®¾ç½®æ‚¬æµ®çª—å£é•¿å®½æ•°æ®
 		windowManagerParams.width = LayoutParams.WRAP_CONTENT;
 		windowManagerParams.height = LayoutParams.WRAP_CONTENT;
-		// ÏÔÊ¾myFloatViewÍ¼Ïñ
+		// æ˜¾ç¤ºmyFloatViewå›¾åƒ
 		windowManager.addView(floatView, windowManagerParams);
 	}
 
 	public void onClick(View v) {
-		Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(getApplicationContext(), UperActivity.class);
+		startActivity(intent);
 	}
 }

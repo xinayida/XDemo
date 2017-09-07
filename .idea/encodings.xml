@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/circleprogressbar/CircleProgressBar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/component/CursorLoaderListFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/draggridview/DragAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/draggridview/DragMainActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/floatview/FloatActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/floatview/FloatView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/framework/DragGridBaseAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/framework/DragGridView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/rotatelayer/RotateLayer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xDemo/src/main/java/com/example/silentinstall/SilentInstallActivity.java" charset="UTF-8" />
+  </component>
 </project>
-

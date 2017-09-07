@@ -90,7 +90,7 @@ public class SilentInstallActivity extends Activity {
 	}
 	
 	/**
-	 * ¾²Ä¬°²×°
+	 * é™é»˜å®‰è£…
 	 * @param file
 	 * @return
 	 */
@@ -106,20 +106,20 @@ public class SilentInstallActivity extends Activity {
 			for(String command:commands){
 				dataOutputStream.writeBytes(command);
 			}
-			// Ìá½»ÃüÁî
+			// æäº¤å‘½ä»¤
 			dataOutputStream.flush();
-			// ¹Ø±ÕÁ÷²Ù×÷
+			// å…³é—­æµæ“ä½œ
 			dataOutputStream.close();
 			out.close();
 			
 //			int value = process.waitFor();
 //			
-//			// ´ú±í³É¹¦
+//			// ä»£è¡¨æˆåŠŸ
 //			if (value == 0) {
 //				result = true;
-//			} else if (value == 1) { // Ê§°Ü
+//			} else if (value == 1) { // å¤±è´¥
 //				result = false;
-//			} else { // Î´ÖªÇé¿ö
+//			} else { // æœªçŸ¥æƒ…å†µ
 //				result = false;
 //			}
 			
