@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.example"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 23
     }
 
     buildTypes {
@@ -19,7 +19,6 @@ android {
 }
 
 dependencies {
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile files('libs/nineoldanimatin.jar')
     compile 'com.android.support:support-v4:23.0.0'
 }

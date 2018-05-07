@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 
-import com.actionbarsherlock.view.Menu;
 import com.example.R;
 
 public class BaseActivity extends FragmentActivity {

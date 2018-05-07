@@ -8,6 +8,8 @@
     <uses-sdk android:minSdkVersion="15" />
 
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name=".DemoApp"
         android:allowBackup="true"
@@ -36,6 +38,12 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".wifi.WifiActivity"/>
         <activity android:name=".httpserver.HttpServer"/>
+        <activity android:name=".jobscheduler.JobSchedulerActiviy" />
+        <activity android:name=".mesh.MeshActivity" />
+        <activity android:name=".TestActivty" />
+
+        <service android:name=".jobscheduler.JobSchedulerService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
