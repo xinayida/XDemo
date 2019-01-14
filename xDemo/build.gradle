@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.example"
@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
-    compile files('libs/nineoldanimatin.jar')
-    compile 'com.android.support:support-v4:23.0.0'
+    implementation files('libs/nineoldanimatin.jar')
+    implementation 'com.android.support:support-v4:23.0.0'
+    implementation 'com.android.support:recyclerview-v7:23.0.0'
 }

@@ -1,17 +1,10 @@
 package com.example;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +22,12 @@ import com.example.mesh.MeshActivity;
 import com.example.rotatelayer.RotateLayerActivity;
 import com.example.silentinstall.SilentInstallActivity;
 import com.example.wifi.WifiActivity;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Demo extends ListActivity {
     private List<Map<String, Object>> demos = new ArrayList<>();
@@ -74,6 +73,8 @@ public class Demo extends ListActivity {
 //    }
 
     private void initDemos() {
+//        Log.d("Stefan", getSysProps("ro.product.version","-1"));
+        getSharedPreferences("SP_JWTTK", Context.MODE_PRIVATE).edit().putString("JWTTK","123123123123").apply();
         addItem("Test", TestActivty.class);
         addItem("Mesh", MeshActivity.class);
         addItem("Http server", HttpServer.class);
@@ -86,6 +87,18 @@ public class Demo extends ListActivity {
         addItem("Components", new String[]{"Contacts Loader", "Camera", "JobScheduler"},
                 new Class[]{ContactsLoaderActivity.class,
                         CameraTest.class, JobSchedulerActiviy.class});
+    }
+
+    public static String getSysProps(String key, String def) {
+        String value = def;
+        try {
+            Class<?> mClassType = Class.forName("android.os.SystemProperties");
+            Method mGetMethod = mClassType.getDeclaredMethod("get", String.class);
+            value = (String) mGetMethod.invoke(mClassType, key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
     }
 
     private void addItem(String name, String[] titles, Class[] clazzs) {
@@ -151,37 +164,37 @@ public class Demo extends ListActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("Stefan","onStop");
+//        Log.d("Stefan","onStop");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.d("Stefan","onSaveInstanceState " + outState);
+//        Log.d("Stefan","onSaveInstanceState " + outState);
     }
 
     @Override
     public void onStateNotSaved() {
         super.onStateNotSaved();
-        Log.d("Stefan","onStateNotSaved ");
+//        Log.d("Stefan","onStateNotSaved ");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("Stefan","onResume ");
+//        Log.d("Stefan","onResume ");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("Stefan","onRestart ");
+//        Log.d("Stefan","onRestart ");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
-        Log.d("Stefan","onRestoreInstanceState " + state);
+//        Log.d("Stefan","onRestoreInstanceState " + state);
     }
 
     @Override
