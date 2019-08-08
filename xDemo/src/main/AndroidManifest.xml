@@ -39,6 +39,10 @@
         <activity android:name=".jobscheduler.JobSchedulerActiviy" />
         <activity android:name=".mesh.MeshActivity" />
         <activity android:name=".TestActivty" />
+        <activity android:name=".largeimage.LargeImageViewActivity"/>
+        <!--<activity android:name=".RecycleViewItemAnimation.RecycleViewAnimationActivity" />-->
+        <activity android:name=".EncryptActivity" />
+        <activity android:name=".Parcelable.ParcelableTest" />
 
         <service android:name=".jobscheduler.JobSchedulerService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
@@ -58,7 +62,7 @@
     <uses-permission
         android:name="android.permission.INSTALL_PACKAGES"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+    <!--<uses-permission android:name="android.permission.CLEAR_APP_CACHE" />-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />

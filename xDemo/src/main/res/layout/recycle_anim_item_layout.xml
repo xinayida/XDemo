@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="#fff"
+    android:clipChildren="false"
+    android:layout_marginBottom="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0F0" />
+
+    <Button
+        android:id="@+id/fire"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="fire" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_gravity="top"
+        android:background="#F00" />
+
+    <View
+        android:id="@+id/anim_cover_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:background="#00F" />
+
+    <View
+        android:id="@+id/anim_view"
+        android:layout_width="match_parent"
+        android:layout_height="106dp" />
+
+
+</FrameLayout>

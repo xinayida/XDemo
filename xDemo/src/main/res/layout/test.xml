@@ -30,6 +30,11 @@
         android:onClick="send3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/long_click_btn"
+        android:text="长按测试"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.example.Parcelable.ParcelableTest;
 import com.example.circleprogressbar.CircleMainActivity;
 import com.example.component.CameraTest;
 import com.example.component.ContactsLoaderActivity;
@@ -18,6 +19,7 @@ import com.example.draggridview.DragMainActivity;
 import com.example.floatview.FloatActivity;
 import com.example.httpserver.HttpServer;
 import com.example.jobscheduler.JobSchedulerActiviy;
+import com.example.largeimage.LargeImageViewActivity;
 import com.example.mesh.MeshActivity;
 import com.example.rotatelayer.RotateLayerActivity;
 import com.example.silentinstall.SilentInstallActivity;
@@ -75,6 +77,9 @@ public class Demo extends ListActivity {
     private void initDemos() {
 //        Log.d("Stefan", getSysProps("ro.product.version","-1"));
         getSharedPreferences("SP_JWTTK", Context.MODE_PRIVATE).edit().putString("JWTTK","123123123123").apply();
+        addItem("EncryptActivity",EncryptActivity.class);
+//        addItem("Anim RecyclerView", RecycleViewAnimationActivity.class);
+        addItem("Large Image", LargeImageViewActivity.class);
         addItem("Test", TestActivty.class);
         addItem("Mesh", MeshActivity.class);
         addItem("Http server", HttpServer.class);
@@ -84,6 +89,7 @@ public class Demo extends ListActivity {
         addItem("Circle Progress Bar", CircleMainActivity.class);
         addItem("Silent Install", SilentInstallActivity.class);
         addItem("Rotate Layoer", RotateLayerActivity.class);
+        addItem("ParcelableTest", ParcelableTest.class);
         addItem("Components", new String[]{"Contacts Loader", "Camera", "JobScheduler"},
                 new Class[]{ContactsLoaderActivity.class,
                         CameraTest.class, JobSchedulerActiviy.class});

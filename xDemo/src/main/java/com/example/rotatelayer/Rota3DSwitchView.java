@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -74,8 +75,8 @@ public class Rota3DSwitchView extends FrameLayout {
     }
 
     //摄像机 为点光源  正真的直角  反而看起来 并不是直角
-    static int rotation = 40;// 设定外角 根据需要自行设定
-    int rotationX = 00;
+    private static final int rotation = 40;// 设定外角 根据需要自行设定
+    int rotationX = 0;
     int index = 0;
 
     @Override
@@ -90,36 +91,36 @@ public class Rota3DSwitchView extends FrameLayout {
 //            handler.sendEmptyMessageDelayed(1, 100);
     }
 
-    private void setCameraChange(int translate, int roat, int i) {
+    private void setCameraChange(int translate, int angle, int i) {
+        int rotate = -angle;
         switch (i) {
             case 0:
                 //预绘制 的VIEW
                 mCamera.translate(-translate / 2, 0, 0);
-                mCamera.rotateY(-roat);
+                mCamera.rotateY(-rotate);
                 mCamera.translate(-translate / 2, 0, 0);
 
                 mCamera.translate(-translate / 2, 0, 0);
-                mCamera.rotateY(-roat);
+                mCamera.rotateY(-rotate);
                 mCamera.translate(-translate / 2, 0, 0);
                 break;
             //当前位置两侧的View
             case 1:
                 mCamera.translate(translate / 2, 0, 0);
-                mCamera.rotateY(roat);
+                mCamera.rotateY(rotate);
                 mCamera.translate(translate / 2, 0, 0);
                 break;
 
             case 2:
                 mCamera.translate(-translate / 2, 0, 0);
-                mCamera.rotateY(-roat);
+                mCamera.rotateY(-rotate);
                 mCamera.translate(-translate / 2, 0, 0);
                 break;
             //最后绘制 当前显示位置 防止 被遮挡
             case 3:
-                mCamera.rotateY(0);
+//                mCamera.rotateY(0);
                 break;
         }
-
 
     }
 
@@ -154,9 +155,12 @@ public class Rota3DSwitchView extends FrameLayout {
         canvas.save();
         mCamera.save();
         mMaxtrix.reset();
-        mCamera.translate(postTranslateX, 0, 0);
+//        if (i == 1) {
+//            Log.d("Stefan", "postTranslateX: " + postTranslateX + " centerX: " + centerX);
+//        }
+        mCamera.translate(-postTranslateX, 0, 0);
         mCamera.rotateY(rotationX);
-        mCamera.translate(postTranslateX, 0, 0);
+        mCamera.translate(-postTranslateX, 0, 0);
         if (postTranslateX == 0) {
             if (isright)
                 setCameraChange(childWith, rotation, i);
@@ -164,7 +168,7 @@ public class Rota3DSwitchView extends FrameLayout {
                 setCameraChange(-childWith, -rotation, i);
         } else if (postTranslateX > 0) {
             setCameraChange(childWith, rotation, i);
-        } else if (postTranslateX < 0) {
+        } else {
             setCameraChange(-childWith, -rotation, i);
         }
         mCamera.getMatrix(mMaxtrix);
@@ -174,7 +178,8 @@ public class Rota3DSwitchView extends FrameLayout {
         canvas.concat(mMaxtrix);
         //绘制
         View childAt = getChildAt((swithView(i) + 2 * getChildCount()) % getChildCount());
-        drawChild(canvas, childAt, 0);
+        final long drawingTime = getDrawingTime();
+        drawChild(canvas, childAt, drawingTime);
         canvas.restore();
     }
 
@@ -253,7 +258,7 @@ public class Rota3DSwitchView extends FrameLayout {
                 //     isTouch = true;
                 moveX = (int) event.getX() - downX;
                 int moveRx = thisRx + moveX * rotation * 2 / (getWidth() + 100);
-                isright = (moveRx > 0) ? true : false;
+                isright = moveRx > 0;
                 int addindex = moveRx / rotation;
                 index = thisindex - addindex;
                 rotationX = moveRx % rotation;

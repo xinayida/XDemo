@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ksyun.media:libksylive-java:3.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57b52c5709e4034bce51545e56a1cacb/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57b52c5709e4034bce51545e56a1cacb/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/57b52c5709e4034bce51545e56a1cacb/jars/libs/ksylive.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
