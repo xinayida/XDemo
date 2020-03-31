@@ -13,7 +13,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar">
+        android:theme="@android:style/Theme.NoTitleBar"
+        tools:replace="android:allowBackup">
         <activity
             android:name=".Demo"
             android:label="@string/app_name">
@@ -34,17 +35,20 @@
         <activity
             android:name=".floatview.UperActivity"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".wifi.WifiActivity"/>
-        <activity android:name=".httpserver.HttpServer"/>
+        <activity android:name=".wifi.WifiActivity" />
+        <activity android:name=".httpserver.HttpServer" />
         <activity android:name=".jobscheduler.JobSchedulerActiviy" />
         <activity android:name=".mesh.MeshActivity" />
         <activity android:name=".TestActivty" />
-        <activity android:name=".largeimage.LargeImageViewActivity"/>
+        <activity android:name=".largeimage.LargeImageViewActivity" />
         <!--<activity android:name=".RecycleViewItemAnimation.RecycleViewAnimationActivity" />-->
         <activity android:name=".EncryptActivity" />
         <activity android:name=".Parcelable.ParcelableTest" />
+        <activity android:name=".login.OnePassActivity" />
+        <activity android:name=".ui.LayoutTest" />
 
-        <service android:name=".jobscheduler.JobSchedulerService"
+        <service
+            android:name=".jobscheduler.JobSchedulerService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 

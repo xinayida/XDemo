@@ -20,9 +20,11 @@ import com.example.floatview.FloatActivity;
 import com.example.httpserver.HttpServer;
 import com.example.jobscheduler.JobSchedulerActiviy;
 import com.example.largeimage.LargeImageViewActivity;
+import com.example.login.OnePassActivity;
 import com.example.mesh.MeshActivity;
 import com.example.rotatelayer.RotateLayerActivity;
 import com.example.silentinstall.SilentInstallActivity;
+import com.example.ui.LayoutTest;
 import com.example.wifi.WifiActivity;
 
 import java.lang.reflect.Method;
@@ -76,7 +78,9 @@ public class Demo extends ListActivity {
 
     private void initDemos() {
 //        Log.d("Stefan", getSysProps("ro.product.version","-1"));
-        getSharedPreferences("SP_JWTTK", Context.MODE_PRIVATE).edit().putString("JWTTK","123123123123").apply();
+//        getSharedPreferences("SP_JWTTK", Context.MODE_PRIVATE).edit().putString("JWTTK","123123123123").apply();
+        addItem("LayoutTest", LayoutTest.class);
+        addItem("OnePassActivity", OnePassActivity.class);
         addItem("EncryptActivity",EncryptActivity.class);
 //        addItem("Anim RecyclerView", RecycleViewAnimationActivity.class);
         addItem("Large Image", LargeImageViewActivity.class);

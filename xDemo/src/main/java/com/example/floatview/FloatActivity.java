@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -46,10 +49,41 @@ public class FloatActivity extends Activity implements OnClickListener {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);// 全屏
 		setContentView(R.layout.float_layout);
 		mTextView = (TextView) findViewById(R.id.text_view);
-		mHandler.sendEmptyMessage(0);
-		createView();
+//		mHandler.sendEmptyMessage(0);
+//		createView();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			if (!Settings.canDrawOverlays(getApplicationContext())) {
+				//启动Activity让用户授权
+				Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+				intent.setData(Uri.parse("package:" + getPackageName()));
+				startActivityForResult(intent, 100);
+			} else {
+				createView();
+			}
+		} else {
+			createView();
+		}
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 100) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				if (Settings.canDrawOverlays(this)) {
+//					WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+//					WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+//					params.type = WindowManager.LayoutParams.TYPE_PHONE;
+//					params.format = PixelFormat.RGBA_8888;
+//					windowManager.addView(view, params);
+					createView();
+				} else {
+					Toast.makeText(this, "ACTION_MANAGE_OVERLAY_PERMISSION权限已被拒绝", Toast.LENGTH_SHORT).show();
+					;
+				}
+			}
 
+		}
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
@@ -72,7 +106,11 @@ public class FloatActivity extends Activity implements OnClickListener {
 				.getSystemService(Context.WINDOW_SERVICE);
 		// 设置LayoutParams(全局变量）相关参数
 		windowManagerParams = ((DemoApp) getApplication()).getWindowParams();
-		windowManagerParams.type = LayoutParams.TYPE_PHONE; // 设置window type
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			windowManagerParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+		} else {
+			windowManagerParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+		}
 		windowManagerParams.format = PixelFormat.RGBA_8888; // 设置图片格式，效果为背景透明
 		// 设置Window flag
 		windowManagerParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL
@@ -83,7 +121,7 @@ public class FloatActivity extends Activity implements OnClickListener {
 		 * 不可触摸
 		 */
 		// 调整悬浮窗口至左上角，便于调整坐标
-		windowManagerParams.gravity = Gravity.LEFT | Gravity.TOP;
+		windowManagerParams.gravity = Gravity.START | Gravity.TOP;
 		// 以屏幕左上角为原点，设置x、y初始值
 		windowManagerParams.x = 0;
 		windowManagerParams.y = 0;
@@ -97,6 +135,7 @@ public class FloatActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 //		Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(getApplicationContext(), UperActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 	}
 }
