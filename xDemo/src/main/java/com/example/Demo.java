@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.Parcelable.ParcelableTest;
+import com.example.animatelayout.AnimateLayoutActivity;
 import com.example.circleprogressbar.CircleMainActivity;
 import com.example.component.CameraTest;
 import com.example.component.ContactsLoaderActivity;
@@ -79,6 +80,7 @@ public class Demo extends ListActivity {
     private void initDemos() {
 //        Log.d("Stefan", getSysProps("ro.product.version","-1"));
 //        getSharedPreferences("SP_JWTTK", Context.MODE_PRIVATE).edit().putString("JWTTK","123123123123").apply();
+        addItem("AnimateLayout", AnimateLayoutActivity.class);
         addItem("LayoutTest", LayoutTest.class);
         addItem("OnePassActivity", OnePassActivity.class);
         addItem("EncryptActivity",EncryptActivity.class);

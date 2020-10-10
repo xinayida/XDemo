@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: __local_aars__:./xDemo/libs/nineoldanimatin.jar:unspecified@jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/xDemo/libs/nineoldanimatin.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

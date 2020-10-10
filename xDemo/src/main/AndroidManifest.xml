@@ -46,6 +46,7 @@
         <activity android:name=".Parcelable.ParcelableTest" />
         <activity android:name=".login.OnePassActivity" />
         <activity android:name=".ui.LayoutTest" />
+        <activity android:name=".animatelayout.AnimateLayoutActivity"/>
 
         <service
             android:name=".jobscheduler.JobSchedulerService"
